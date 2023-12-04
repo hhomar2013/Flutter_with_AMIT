@@ -194,7 +194,8 @@ class _bmiCalculatorState extends State<bmiCalculator> {
                                 FloatingActionButton(
                                   onPressed: (){
                                     setState(() {
-                                      weight--;
+                                      weight > 60 ? weight-- : '';
+
                                     });
                                   },
                                   child: Icon(Icons.remove,
@@ -208,7 +209,7 @@ class _bmiCalculatorState extends State<bmiCalculator> {
                                 ),
                                 FloatingActionButton(onPressed: (){
                                   setState(() {
-                                    weight++;
+                                  weight++;
                                   });
                                 },
                                   child: Icon(Icons.add,
@@ -257,7 +258,7 @@ class _bmiCalculatorState extends State<bmiCalculator> {
                                 FloatingActionButton(
                                   onPressed: (){
                                     setState(() {
-                                      age--;
+                                      age > 15 ? age-- : '';
                                     });
                                   },
                                   child: Icon(Icons.remove,
