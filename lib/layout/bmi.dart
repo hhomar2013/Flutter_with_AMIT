@@ -1,4 +1,7 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:mtg/shared/components/components.dart';
+import '../modules/bmi/bmi_result.dart';
 class bmiCalculator extends StatefulWidget {
   const bmiCalculator({super.key});
   @override
@@ -20,6 +23,14 @@ class _bmiCalculatorState extends State<bmiCalculator> {
       backgroundColor: Color(0xffb101322),
       appBar: AppBar(
         backgroundColor: Color(0xffb101322),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_new_rounded),
+          color: Colors.white,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+
         elevation: 1,
         title: Center(
             child: Text('BMI CALCULATOR',
@@ -159,7 +170,8 @@ class _bmiCalculatorState extends State<bmiCalculator> {
                     ],
                   ),
                 ),
-              )),// Navigation
+              )
+          ),// Navigation
           // SizedBox(height: 10,),
           Expanded(
             child: Padding(
@@ -308,7 +320,10 @@ class _bmiCalculatorState extends State<bmiCalculator> {
                 child: Padding(
                   padding: const EdgeInsets.all(0.8),
                   child: TextButton(onPressed: (){
-                    print('Calculated');
+                    double result = weight / pow(height/100,2) ;
+                    Navigator.push(context,
+                    MaterialPageRoute(builder: (context)=> bmiResultScreen(age: age, result: result.round(), isMale: isMale))
+                    );
                   },
                     child: Text('CALCULATE',
                       style: TextStyle(

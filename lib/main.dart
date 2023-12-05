@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mtg/Home.dart';
-import 'package:mtg/bmi.dart';
+import 'package:mtg/layout/Home.dart';
+import 'package:mtg/layout/routs.dart';
+import 'package:mtg/layout/to_do_list.dart';
+import 'package:mtg/layout/bmi.dart';
 import 'package:mtg/contacts.dart';
 import 'package:mtg/conter.dart';
 import 'package:mtg/login_screen.dart';
+
 
 
 void main() {
@@ -18,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:  bmiCalculator(),
+      home:  routsScreen(),
     );
   }
 }

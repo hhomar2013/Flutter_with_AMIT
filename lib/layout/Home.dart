@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        leading: Icon(
-          Icons.menu
+        leading: IconButton(icon: 
+        Icon(Icons.arrow_back_ios_new_rounded),
+          onPressed: (){
+          Navigator.pop(context);
+          },
         ),
         title: Center(
           child: Text('Amit' ,
