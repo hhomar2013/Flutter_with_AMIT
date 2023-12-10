@@ -19,3 +19,9 @@ List <Widget> Screens = [
   doneTasks(),
   archiveTask(),
 ];
+
+List <Icon> todoIcons =[
+  Icon(Icons.list_outlined),
+  Icon(Icons.done),
+  Icon(Icons.archive),
+];

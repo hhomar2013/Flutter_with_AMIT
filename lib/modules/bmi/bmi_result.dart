@@ -63,20 +63,20 @@ class bmiResultScreen extends StatelessWidget {
                         fontSize: 30
                   ),
                   ),
-                SizedBox(height: 20,),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: defaultButton(
-                    text: 'Go back',
-                      backGround: Color(0xffbe6144b),
-                      isUpperCase: false,
-                      radius: 25,
-                      height: 40,
-                      function: () {
-                      Navigator.pop(context);
-                      },
-                    ),
-                  ),
+                // SizedBox(height: 20,),
+                //   Padding(
+                //     padding: const EdgeInsets.all(8.0),
+                //     child: defaultButton(
+                //     text: 'Go back',
+                //       backGround: Color(0xffbe6144b),
+                //       isUpperCase: false,
+                //       radius: 25,
+                //       height: 40,
+                //       function: () {
+                //       Navigator.pop(context);
+                //       },
+                //     ),
+                //   ),
                 ],
               ),
             ),

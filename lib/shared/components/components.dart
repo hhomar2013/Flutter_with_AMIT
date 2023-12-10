@@ -36,3 +36,17 @@ icon: Icon(Icons.arrow_back_ios_new_rounded),
   color: color,
   onPressed: () { function (); },
 );
+
+Widget textInput  ({
+  double width = double.maxFinite,
+  double height = 50,
+  double radius = 10,
+  required String placeholder,
+  required Function function,
+  required String text,
+  bool  isUpperCase = false,
+}) => Container(
+  width: double.maxFinite,
+  child: TextFormField(
+  ),
+);
