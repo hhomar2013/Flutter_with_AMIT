@@ -1,3 +1,4 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:mtg/layout/Home.dart';
 import 'package:mtg/layout/routs.dart';
@@ -6,10 +7,12 @@ import 'package:mtg/layout/bmi.dart';
 import 'package:mtg/contacts.dart';
 import 'package:mtg/conter.dart';
 import 'package:mtg/messenger_clone.dart';
-
+import 'package:mtg/modules/toDoList/cubit/status.dart';
+import 'package:mtg/shared/style/bloc_observer.dart';
 
 
 void main() {
+  Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
 

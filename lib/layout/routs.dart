@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mtg/layout/Home.dart';
 import 'package:mtg/layout/bmi.dart';
+import 'package:mtg/layout/cib.dart';
 import 'package:mtg/layout/to_do_list.dart';
 import 'package:mtg/messenger_clone.dart';
 import 'package:sqflite/sqflite.dart';
@@ -30,23 +31,29 @@ class routsScreen extends StatelessWidget {
                   SizedBox(height: 10,),
                 defaultButton(function: (){
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context)=> HomeScreen()));
+                      MaterialPageRoute(builder: (context)=> const HomeScreen()));
                 },backGround: Colors.blueAccent, text: 'Photo Gallery'), // Photo Gallery
                 SizedBox(height: 10,),
                 defaultButton(function: (){
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context)=> LoginScreen()));
+                      MaterialPageRoute(builder: (context)=>  const LoginScreen()));
                 },backGround: Colors.indigo, text: 'Messenger Clone'), // Messenger Clone
                 SizedBox(height: 10,),
                 defaultButton(function: (){
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context)=> bmiCalculator()));
+                      MaterialPageRoute(builder: (context)=> const bmiCalculator()));
                 }, text: 'BMI Calculator'), //Bim Calculator
                 SizedBox(height: 10,),
                 defaultButton(function: (){
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context)=> toDoList()));
+                      MaterialPageRoute(builder: (context)=> const toDoList()));
                 }, text: 'To Do List',backGround: Colors.teal), //To Do List
+                SizedBox(height: 10,),
+                defaultButton(function: (){
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context)=> const cib()));
+                }, text: 'CIB',backGround: Colors.blue), //To Do List
+
               ],
             ),
           ),

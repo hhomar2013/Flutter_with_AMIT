@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'users_data.dart';
+import 'models/users_data.dart';
 class ContactsScreen extends StatelessWidget {
   List<UsersData> users = [
     UsersData(id: 10, name: 'Omar Mahgoub', phone: '0112858586'),
