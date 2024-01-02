@@ -1,10 +1,8 @@
-abstract class AppStatus {
-
-}
+abstract class AppStatus {}
 class AppInitialStat extends AppStatus{ }//Starting point
 class AppChangeBottomNavBarState extends AppStatus{} //change index
 class AppCreateDataBaseState extends AppStatus{}// create or open database
-class AppGeDataBaseState extends AppStatus {}
+class AppGetDataBaseState extends AppStatus {}
 class AppGetDataBaseLoadingState extends AppStatus{}
 class AppInsertDataBaseState extends AppStatus{}
 class AppChangeBottomSheetState extends AppStatus{}

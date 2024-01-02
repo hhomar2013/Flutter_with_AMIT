@@ -31,193 +31,227 @@ class cib extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.all(30),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-                Text('UserName',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25
-                ),
+          child: SingleChildScrollView(
+            reverse: true,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                  Text('UserName',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25
+                  ),
+                  ),
+                  TextFormField(
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                    decoration: InputDecoration(
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                        )
+                      )
+                    ),
+                  ),
+                SizedBox(height: 15,),
+                Text('Password',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25
+                  ),
                 ),
                 TextFormField(
+                  keyboardType: TextInputType.text,
+                  obscureText: true,
                   style: TextStyle(
                     color: Colors.white,
                   ),
                   decoration: InputDecoration(
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          )
                       )
-                    )
                   ),
                 ),
-              SizedBox(height: 15,),
-              Text('Password',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25
+                SizedBox(height: 15,),
+                Padding(
+                  padding: const EdgeInsets.all(2),
+                  child: Row(
+                    children: [
+                      defaultButton(function: (){},
+                          width: 270,
+                          text: 'Login',
+                          backGround: Colors.deepOrangeAccent
+                      ),
+                      SizedBox(width: 10,),
+                      defaultIconButton(
+                        width: 60,
+                        Iconbtn: Icons.fingerprint,
+                        function: (){},
+                        backGround: Colors.deepOrangeAccent,
+                        iconColor: Colors.white
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              TextFormField(
-                keyboardType: TextInputType.text,
-                obscureText: true,
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-                decoration: InputDecoration(
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.white,
-                        )
-                    )
-                ),
-              ),
-              SizedBox(height: 15,),
-              Padding(
-                padding: const EdgeInsets.all(2),
-                child: Row(
-                  children: [
-                    defaultButton(function: (){},
-                        width: 270,
-                        text: 'Login',
-                        backGround: Colors.deepOrangeAccent
-                    ),
-                    SizedBox(width: 10,),
-                    defaultIconButton(
-                      width: 60,
-                      Iconbtn: Icons.fingerprint,
-                      function: (){},
-                      backGround: Colors.deepOrangeAccent,
-                      iconColor: Colors.white
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(height: 10,),
-              defaultButton(function: (){},
-                width: 200,
-                text: 'Register New User',
-                backGround: Colors.transparent,
-              ),
-              defaultButton(function: (){},
-                  width: 100,
-                  text: 'Login',
+                SizedBox(height: 10,),
+                defaultButton(function: (){},
+                  width: double.maxFinite,
+                  text: 'Register New User',
                   backGround: Colors.transparent,
-              ),
-              SizedBox(height: 10,),
-              const Padding(
-                padding: EdgeInsets.all(10),
-                child: Row(
-                   children: [
-                        Column(
-                          children: [
-                            Icon(Icons.vpn_lock,
-                            color: Colors.white,
-                              size: 50,
-                            ),
-                            Text('IBAN',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white
-                            ),
-                            ),
-                          ],
-                        ) , //IBAN
-                        SizedBox(width: 60,),
-                       Column(
-                       children: [
-                         Icon(Icons.phone_android,
-                           color: Colors.white,
-                           size: 50,
-                         ),
-                         Text('Tutorials',
-                           style: TextStyle(
-                               fontSize: 20,
-                               fontWeight: FontWeight.bold,
-                               color: Colors.white
-                           ),
-                         ),
-                       ],
-                     ) ,
-                     SizedBox(width: 80,),
-                     Column(
-                       children: [
-                         Icon(Icons.vpn_lock,
-                           color: Colors.white,
-                           size: 50,
-                         ),
-                         Text('IBAN',
-                           style: TextStyle(
-                               fontSize: 20,
-                               fontWeight: FontWeight.bold,
-                               color: Colors.white
-                           ),
-                         ),
-                       ],
-                     ) ,
-                   ],
                 ),
-              ),
-              const Padding(
-                padding: EdgeInsets.all(10),
-                child: Row(
+                defaultButton(function: (){},
+                    width: double.maxFinite,
+                    text: 'forget/Reset Password',
+                    backGround: Colors.transparent,
+                ),
+                SizedBox(height: 10,),
+            
+                Row(
                   children: [
-                    Column(
-                      children: [
-                        Icon(Icons.vpn_lock,
-                          color: Colors.white,
-                          size: 50,
-                        ),
-                        Text('IBAN',
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white
+                    Expanded(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                print('IBAN');
+                              },
+                              icon: Icon(Icons.vpn_lock ,
+                                color: Colors.white,
+                                size: 50,
+                              )
                           ),
-                        ),
-                      ],
-                    ) , //IBAN
-                    SizedBox(width: 80,),
-                    Column(
-                      children: [
-                        Icon(Icons.vpn_lock,
-                          color: Colors.white,
-                          size: 50,
-                        ),
-                        Text('IBAN',
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white
+                          Text('IBAN',
+                            style: TextStyle(
+                                color: Colors.white
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                print('Tutorials');
+                              },
+                              icon: const Icon(Icons.phone_android ,
+                                color: Colors.white,
+                                size: 50,
+                              )
                           ),
-                        ),
-                      ],
-                    ) ,
-                    SizedBox(width: 80,),
-                    Column(
-                      children: [
-                        Icon(Icons.vpn_lock,
-                          color: Colors.white,
-                          size: 50,
-                        ),
-                        Text('IBAN',
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white
+                          const Text('Tutorials',
+                            style: TextStyle(
+                                color: Colors.white
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                print('IBAN');
+                              },
+                              icon: const Icon(Icons.insert_chart_outlined ,
+                                color: Colors.white,
+                                size: 50,
+                              )
                           ),
-                        ),
-                      ],
-                    ) ,
+                          const Text('Exchange Rates',
+                            style: TextStyle(
+                                color: Colors.white
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                   ],
                 ),
-              ),
-            ],
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                print('CIB Bonus');
+                              },
+                              icon: Icon(Icons.card_giftcard ,
+                                color: Colors.white,
+                                size: 50,
+                              )
+                          ),
+                          Text('CIB Bonus',
+                            style: TextStyle(
+                                color: Colors.white
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                print('Offers');
+                              },
+                              icon: const Icon(Icons.bookmark_border ,
+                                color: Colors.white,
+                                size: 50,
+                              )
+                          ),
+                          const Text('Offers',
+                            style: TextStyle(
+                                color: Colors.white
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                print('More');
+                              },
+                              icon: const Icon(Icons.keyboard_control_outlined ,
+                                color: Colors.white,
+                                size: 50,
+                              )
+                          ),
+                          const Text('More',
+                            style: TextStyle(
+                                color: Colors.white
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+            
+              ],
+            ),
           ),
         ),
       ),

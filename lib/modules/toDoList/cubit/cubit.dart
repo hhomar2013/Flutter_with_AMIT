@@ -6,6 +6,7 @@ import 'package:mtg/modules/toDoList/archiveTasks.dart';
 import 'package:mtg/modules/toDoList/cubit/status.dart';
 import 'package:mtg/modules/toDoList/doneTasks.dart';
 import 'package:mtg/modules/toDoList/TasksScreen.dart';
+import 'package:mtg/shared/components/constant.dart';
 import 'package:sqflite/sqflite.dart';
 
 class AppCubit extends Cubit<AppStatus>{
@@ -16,6 +17,8 @@ class AppCubit extends Cubit<AppStatus>{
   IconData fabIcon = Icons.edit;
   late Database database;
   List<Map> taskMap =[];
+  List<Map> doneTaskMap =[];
+  List<Map> archiveTaskMap =[];
   int currentIndex = 0;
   List <String> pageTitle = [
     'New Tasks',
@@ -37,8 +40,7 @@ class AppCubit extends Cubit<AppStatus>{
     Icon(Icons.done),
     Icon(Icons.archive),
   ];
-  void changeIndex (int index)
-  {
+  void changeIndex (int index) {
     currentIndex = index;
     emit(AppChangeBottomNavBarState());
   }
@@ -65,15 +67,25 @@ class AppCubit extends Cubit<AppStatus>{
     });
   }
 
+  void formClear(){
+    titleController.clear();
+    dateController.clear();
+    timeController.clear();
+  }
+
   Future insertDatabase({
     required String title,
     required String date,
     required String time,
   }) async {
     return await database.transaction((txn) {
-      return  txn.rawInsert("INSERT INTO tasks(title,date,time,status) VALUES('$title','$date','$time','new')")
+      return  txn.rawInsert("INSERT INTO tasks(title,date,time,status)"
+          " VALUES('$title','$date','$time','new')")
           .then((value) {
         print('$value Inserted.');
+        emit(AppInsertDataBaseState());
+        formClear();
+
       }).catchError((onError) {
         print('Error in $onError');
       });
@@ -81,9 +93,24 @@ class AppCubit extends Cubit<AppStatus>{
   }
 
 
-  Future <List<Map>> getDataFromDatabase(database) async {
+   void  getDataFromDatabase(database)  {
+    taskMap = [];
+    doneTaskMap = [];
+    archiveTaskMap = [];
     emit(AppGetDataBaseLoadingState());
-    return await database.rawQuery('SELECT * FROM tasks');
+      database.rawQuery('SELECT * FROM tasks').then((value){
+          value.forEach((element){
+            if(element['status'] == 'new'){
+              taskMap.add(element);
+            }else if (element['status'] == 'done'){
+              doneTaskMap.add(element);
+            }else if (element['status'] == 'archive'){
+              archiveTaskMap.add(element);
+            }
+          });
+        emit(AppGetDataBaseState());
+      });//calling
+
   }
 
 
@@ -101,7 +128,7 @@ class AppCubit extends Cubit<AppStatus>{
       required String status,
       required int id,
     })async{
-    database.rawUpdate('UPDATE tasks SET status = $status WHERE id = $id').then((value) {
+    database.rawUpdate('UPDATE tasks SET status = ? WHERE id = ?' , ['$status',id]).then((value) {
       getDataFromDatabase(database);
       emit(AppUpdateDatabaseState());
     });

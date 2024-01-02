@@ -1,5 +1,6 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
+import 'package:mtg/modules/newsapp/webview.dart';
 import 'package:mtg/modules/toDoList/cubit/cubit.dart';
 import 'package:mtg/shared/components/constant.dart';
 
@@ -23,7 +24,7 @@ Widget defaultTextField({
     onSubmit!(value);
   },
   onChanged: (value){
-    onChange!();
+    onChange!(value);
   },
   validator: (value){
    return validate!(value);
@@ -101,8 +102,6 @@ Widget defaultIconButton({
     )
 );
 
-
-
 Widget buildTaskItem(Map model , context) => Dismissible( // updating , remove , nav to UI
   key: Key(model['id'].toString()),
   child: Padding(
@@ -160,36 +159,112 @@ Widget buildTaskItem(Map model , context) => Dismissible( // updating , remove ,
     AppCubit.get(context).deleteData(id: model['id']);
     },
 );
-
 Widget taskBuilder({
   required List<Map> tasks ,
 }) => ConditionalBuilder(
-    condition: tasks.length > 0,
-    builder: (context) => ListView.separated(
-      itemBuilder: (context , index ) => buildTaskItem(tasks[index], context),
-      separatorBuilder: (context , index ) => SizedBox(height: 20),
-      itemCount: tasks.length ,
-    ),
-    fallback: (context) => Center(
-        child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
+  condition: tasks.length > 0,
+  builder: (context) => ListView.separated(
+    itemBuilder: (context , index ) => buildTaskItem(tasks[index], context),
+    separatorBuilder: (context , index ) => SizedBox(height: 20),
+    itemCount: tasks.length ,
+  ),
+  fallback: (context) => Center(
+    child: Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-            Icon(
-        Icons.menu,
-        size: 100,
-        color: Colors.grey,
-        ),
-        Text(
-        'No Tasks Yet , Please add some tasks',
-        style: TextStyle(
-            fontSize: 50,
-        ),
-        )
+          Icon(
+            Icons.menu,
+            size: 100,
+            color: Colors.grey,
+          ),
+          Text(
+            'No Tasks Yet , Please add some tasks',
+            style: TextStyle(
+              fontSize: 50,
+            ),
+          )
 
         ],
-        ),
-        ),
+      ),
     ),
+  ),
 );
+
+
+Widget buildArticleItem(article ,context) =>  InkWell(
+  onTap: (){
+    navigateTo(context , WebViewScreen('${article['url']}'));
+  },
+  child: Padding(
+    padding: const EdgeInsets.all(20.0),
+    child: Row(
+      children: [
+        Container(
+          width: 120,
+          height: 120,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            image:  DecorationImage(
+              image: article['urlToImage'] == null ? NetworkImage('https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') : NetworkImage('${article['urlToImage']}') ,
+              fit: BoxFit.cover,
+            ),
+
+          ),
+        ),
+        const SizedBox(width: 20,),
+        Expanded(
+          child: Container(
+            height: 120,
+            child:  Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              // mainAxisSize: MainAxisSize.min,
+              children: [
+                Expanded(
+                  child: Text(
+                   '${article['title']}',
+                    style: Theme.of(context).textTheme.bodyText1,
+                    maxLines: 4,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                Text(
+                  '${article['publishedAt']}',
+                  style: TextStyle(
+                      color: Colors.grey
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    ),
+  ),
+) ;
+
+Widget articleBuilder({required List list, context , searchItem = false}) => ConditionalBuilder(
+  condition: list.length > 0,
+  builder: (context) => ListView.separated(
+    itemBuilder: (context , index ) => buildArticleItem(list[index], context),
+    separatorBuilder: (context , index ) => SizedBox(height: 20),
+    itemCount: list.length ,
+  ),
+  fallback: (context) =>  searchItem ? Container() : Center(child:
+  // Column(
+  //   mainAxisAlignment: MainAxisAlignment.center,
+  //   crossAxisAlignment: CrossAxisAlignment.center,
+  // children: [
+  //   Icon(Icons.business),
+  //   Text('Sorry No data',
+  //   style: Theme.of(context).textTheme.bodyText1,
+  //   )
+  // ],
+  // ),
+    CircularProgressIndicator(),
+  ),
+);
+
+void navigateTo(context , widget) => Navigator.push(context, MaterialPageRoute(builder: (context) => widget,));

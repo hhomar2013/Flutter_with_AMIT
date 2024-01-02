@@ -12,9 +12,13 @@ class toDoList extends StatelessWidget {
   const toDoList({super.key});
   Widget build(BuildContext context) {
     return  BlocProvider(
-      create:  (BuildContext context) => AppCubit(),
+      create:  (BuildContext context) => AppCubit()..createDatabase(),
       child: BlocConsumer<AppCubit,AppStatus>(
-        listener: (context,state) {},
+        listener: (context,state) {
+          if (state is AppInsertDataBaseState){
+            Navigator.pop(context);
+          }
+        },
         builder:(context,state) {
           AppCubit cubit = AppCubit.get(context);
           return  Scaffold(
@@ -38,9 +42,10 @@ class toDoList extends StatelessWidget {
               onPressed: () {
                 if(cubit.isBottomSheetShown){
                   if(formKey.currentState!.validate()){
-                    Navigator.pop(context);
+                    cubit.insertDatabase(title: titleController.text, date: dateController.text, time: timeController.text,);
+                   /* Navigator.pop(context);
                     cubit.isBottomSheetShown= false;
-                    cubit.fabIcon = Icons.edit;
+                    cubit.fabIcon = Icons.edit;*/
                   }
                 }else{
                   scaffoldState.currentState!.showBottomSheet(
@@ -67,24 +72,27 @@ class toDoList extends StatelessWidget {
                               ),
                               SizedBox(height: 15,),
                               defaultTextField(
-                                controller: timeController,
-                                label: 'Time',
-                                hintText: 'Time',
+                                controller: timeController ,
+                                type: TextInputType.datetime ,
+                                label: 'Task Time',
                                 prefix: Icons.watch_later_outlined,
                                 onTap: (){
-                                  showTimePicker(context: context,
-                                      initialTime: TimeOfDay.now()).then((value) {
-                                    timeController.text = value.toString();
+                                  showTimePicker(
+                                    context: context,
+                                    initialTime: TimeOfDay.now(),
+                                  ).then((value){
+                                    timeController.text = value!.format(context).toString();
+                                    print(value?.format(context));
                                   });
                                 },
-                                type: TextInputType.datetime,
                                 validate: (String value){
-                                  if(value == null || value.isEmpty){
-                                    return "Empty";
+                                  if( value == null || value.isEmpty){
+                                    return "Time must not be empty";
                                   }
-                                  return null;
+                                  return null ;
                                 },
                               ),
+
                               SizedBox(height: 15,),
                               defaultTextField(
                                 controller: dateController,
@@ -115,9 +123,6 @@ class toDoList extends StatelessWidget {
                     ),
                   ).closed.then((value) {
                     cubit.isBottomSheetShown = false;
-                    cubit.insertDatabase(title: titleController.text,
-                        date: dateController.text,
-                        time: timeController.text);
                     cubit.fabIcon = Icons.add;
                   });
                   cubit.isBottomSheetShown = true;
@@ -153,8 +158,6 @@ class toDoList extends StatelessWidget {
                 ]),
           );
         }
-
-
       )
     );
 

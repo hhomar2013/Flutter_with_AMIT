@@ -9,6 +9,7 @@ import 'package:sqflite/sqflite.dart';
 var titleController = TextEditingController();
 var timeController = TextEditingController();
 var dateController = TextEditingController();
+var searchController = TextEditingController();
 GlobalKey<ScaffoldState> scaffoldState = GlobalKey();
 final formKey = GlobalKey<FormState>();
 IconData cibIcon = Icons.edit;
